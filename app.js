@@ -361,5 +361,337 @@ let post1 = createBlogPost(`JJ Smith`, 'i will rock the concert',
 
 console.log(post1);
 
+Arrays in js 
 
+const numbers = [2,34,34];
+// methods to add elements to the end , begn , middle
+// end
+numbers.push(5,6);
+// beginning
+numbers.unshift(69);
+// middle 
+numbers.splice(2,0,44);
+console.log(numbers);
+
+// finding elements => 
+console.log(numbers.indexOf(33));
+console.log(numbers.lastIndexOf(34));
+
+const number = [24,34,2];
+console.log(number.indexOf(34));
+console.log(number.includes(2));
+
+---- finding reference types
+
+const course = [
+   { id: 1, name: 'a'},
+   { id: 2, name: 'b'}  
+];
+// returning false because both the objects have different references.
+//console.log(course.includes({id:1,name:'a'})); // => false
+console.log(course.find((elem) => {
+   return elem.id === 1;
+}));
+ 
+const movies = [
+    {id : 1 , name : 'Life of Pi'},
+    {id : 2 , name : 'The White Tiger'}
+];
+let res = movies.find((movie) => {
+    return movie.id == 1;
+}); // returns the first element that matches this criteria else return undefined.
+console.log(res);
+// removing elements from the array
+const nums = [1,2,3,4];
+let last = nums.pop();
+console.log(last);
+let first = nums.shift();
+console.log(first);
+nums.splice(1,1);
+console.log(nums);
+// removal of elems can also be done at end , begin , middle
+// emptying an array
+// let nums = [1,3,5,6];
+//  nums = [];
+// nums.length = 0 ;
+// console.log(nums);
+// console.log(nums);
+
+// concatenating an array
+let nums = [1,3,5,6];
+let nums2 = [2,5,2,5];
+let res = nums.concat(nums2);
+console.log(res);
+
+// slice is used to divide an array into 2 parts
+console.log(res.slice(1,5)); // 3,5,6,2
+
+// the spread operator
+const first = [23,2,35,12,5];
+const second = [5,3,63,6,3];
+const combined = [...first,'Spread is good',...second];
+console.log(combined);
+const copy = [...combined];
+console.log(copy);
+
+// iterating an array
+const numbers = [2,53,63,6,32];
+for(let num of numbers)
+    console.log(num);
+
+ numbers.forEach((num) =>{
+   console.log(num);
+ });   
+
+ let nums = [2,5,1,6];
+ let res = nums.join('..');
+ console.log(res);
+ 
+ const message = 'THis is my message';
+ let parts = message.split(' ');
+ 
+ const combined = parts.join('-');
+ console.log(combined);
+
+ // sorting 
+ const nums = [9,56,5,4,3,44,32];
+ nums.sort();
+ console.log(nums);
+ nums.reverse();
+ console.log(nums);
+ const courses = [
+  {id: 1, name : 'Js'},
+ {id : 2 , name: 'Python'}
+ ];
+ courses.sort((a,b) => {
+  // a=>b  1 
+  // a<=b -1
+  // a===b 0
+ //  if(a.name > b.name) return 1;
+ //  if(a.name < b.name) return -1;  
+    return b.id-a.id;
+ });
+ 
+ console.log(courses);
+ 
+ // testing the elements of array 
+ const nums = [2,3,6,3,6,3];
+ let res = nums.every((val)=>{
+   return val >= 0;
+ });
+ console.log(res);
+ // same as this every() method we also have some() method.
+ 
+ // filtering an array 
+ const nums = [4,-3,3,-6,38,-67,5,75,3];
+ const filtered = nums.filter((val) =>{
+   return val>0;
+ });
+ console.log(filtered);
+ 
+ // mapping values of the array
+ const nums = [4,-3,3,-6,38,-67,5,75,3];
+ const filtered = nums.filter((val) =>{
+   return val>0;
+ });
+ const res = filtered.map((n) => {
+  return '<li>'+ n + '</li>';
+ }); 
+ //console.log(res);
+ const html = '<ul>'+ res.join('') + '</ul>';
+ console.log(html);
+ 
+ // reducing an array 
+ const nums = [6,5,7,4,7];
+ let sum  = 0;
+ for(let n of nums)
+     sum += n;
+ 
+ console.log(sum);
+ 
+ const summ = nums.reduce((accumulator , currentValue) =>{
+  return accumulator+currentValue;
+ },0);
+ 
+ console.log(summ);
+ function arr(min , max){
+    let ans = []; 
+    for(let i = min ; i<=max; i++){
+           ans.push(i);
+     }
+    return ans;
+ }
+let ans =  arr(-10,-4);
+console.log(ans);
+const nums = [3,23,6,3,56,32];
+
+function includes(arr,num){
+   for(let n of arr)
+         if(n === num)
+          return true;
+   return false;       
+}
+console.log(includes(nums,33));
+// function declaration vs function expression
+
+// function declaration
+function walk(){
+     console.log('walk');
+ }
+ // in js functions are objects
+ // function expression
+ let run = function(){
+   console.log('run');
+ };
+run();
+
+we can call a function even before it is defined when using function declaration
+because js engine moves all the function declaration to the top when running code.
+This is what we call as hoisting .
+Hoisting is the process of moving the function declaration to the top.
+and it is done automatically by js.
+
+1+undefined = NaN
+
+// Arguments
+function args(){
+   let sum = 0;
+   for(let n of arguments)
+       sum+=n;
+   return sum;    
+}
+console.log(args(4,5,4,6,3,5));
+
+// the rest operator
+// in modern js if we want to use function with varying number of parameters
+// we use the rest operator
+function restOp(...args){
+  console.log(args); 
+}
+// when we pass varying number of arguments rest operator will put them into an array .
+// only one condition -> rest parameter must be the last function paramter
+restOp(12,4,2,5,24);
+
+// default parameters
+function interest(p, r = 3.5, t){
+   // example
+  // r = r || 3.5;
+    return p*r/100*t;
+}
+console.log(interest(10000,3.5,5));
+
+// getters and setters
+// get          set
+const person = {
+    firstName : 'Mosh',
+    lastName : 'Hamedani',
+    get fullName(){
+      return `${person.firstName} ${person.lastName}`;   
+    },
+    set fullName(value){
+       const parts = value.split(' ');
+       this.firstName = parts[0];
+       this.lastName = parts[1];
+    }
+};
+person.fullName = 'Arun Yadav';
+console.log(person.fullName);
+
+
+ // try & catch 
+function isName(val){ 
+if(typeof(val) !== 'string') 
+  throw new Error('Value is not a string');
+return val;
+}
+try{
+    isName(11);
+}
+catch(e){
+    console.log(e);
+}
+
+// global vs local scope
+{
+const message = 'hi';
+}
+console.log(message);
+// message is not defined
+// local variables take precedence in a function
+
+// let vs var
+let x = 0;
+var y = 0; // avoid using var 
+function start(){
+    for(var i = 0 ; i<5; i++)
+      console.log(i);
+  console.log(i); // 5 will also be logged    
+}
+// when we declare variable with var its scope is not limited 
+// to the block where it is defined . it is limited to
+// the function in which it is defined.
+start();
+// and this is not the way how all programming language work.
+// let , const - block scoped 
+// var - function scoped
+
+// this keyword
+// this refers to the object that is executing the 
+// current function
+
+// method = obj
+const video = {
+    title : 'a',
+    play(){
+        console.log(this); 
+    } 
+};
+video.play(); 
+// because play() is a method in video object
+
+// function = global(window,global)
+function playVideo() {
+    console.log(this);
+}  
+playVideo(); 
+
+const gg = {
+    title : 'a',
+    tags : ['a','b','c'],
+    showtags(){
+        this.tags.forEach(function(tag){
+         console.log(tag);
+        });
+    }
+}
+gg.showtags();
+
+functions are objects in javascript
+
+// changing this 
+function playVideo(a,b){
+    console.log(this);
+}
+playVideo.call({name : 'Mosh'},1,2); 
+// now this will refer to the object instead of reffering to window.
+playVideo.apply({name : 'Mosh'},[1,2]);
+const fn = playVideo.bind({name : 'Mosh'});
+fn();
+// all three methods produce similar results 
+
+function sum(...args){
+    let sum = 0;
+    for(let arg of args)
+       sum+=arg;
+  return sum;      
+}
+console.log(sum(1,3,3,2,3));
+
+const circle = {
+  radius : 2,
+  area(){
+      return Math.PI*this.radius*this.radius;
+  }
+};
+console.log(circle.area());
 */
