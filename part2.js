@@ -359,19 +359,129 @@ const goodbye = function(){
        // these are available with class reference 
        console.log('parsing');  
     }
-  }
-  
-  const circle = new Circle(33);
+}
+
+const circle = new Circle(33);
   Circle.parse('PARSE');
   console.log(circle);
 
-*/
- 
-
-
+  // this keyword
+  const Circle = function(){
+      this.draw = function(){
+          console.log(this);
+        }
+    };  
+    const c  = new Circle();
+    console.log(c.draw()); // point to circle object
+    const draw = c.draw;
+    console.log(draw()); // will point to global/window object
+    by default the body of class execute in strict mode.
     
+
+// Weakmaps for private properties
+const _radius = new WeakMap(); // takes a key value for initialization
+const _move = new WeakMap();
+
+class Circle{
+    constructor(radius){
+       _radius.set(this,radius) 
+       _move.set(this,() => {
+// in arrow fn this inherits from parent              
+        console.log('move',this);
+       });
+    }
+    draw(){
+        //console.log(_radius.get(this));
+        _move.get(this)();
+        console.log('draw');  
+    }
+
+}
+const c = new Circle(2);
+console.log(c); // we do not have access to radius property
+c.draw();
  
+// getters and setters 
+const _radius = new WeakMap();
+class Circle {
+    constructor(radius){
+     _radius.set(this,radius);
+    }
+  // one way to read.  
+   getRadius(){
+       return _radius.get(this);
+   } 
+ // other ways  
+   get radius(){
+       return _radius.get(this);
+   }
+   set radius(value){
+       if(value <= 0) throw new Error('Invalid radius');
+       _radius.set(this,value); 
+   } 
+} 
+
+const c = new Circle(33);
+console.log(c.getRadius());
+c.radius = 10;
+console.log(c.radius);
+  
+// inheritance 
+class shape {
+    
+    constructor(color){
+        this.color = color; 
+    }
+    
+    move(){
+        console.log('move');
+    }
+}
+class circle extends shape{
    
+    constructor(color){
+        super(color); // initialize the base obj first
+    } 
+
+    draw(){
+        console.log('draw');
+    }
+}
+const c = new circle('red');
+console.log(c); // will have both move and draw
+
+// Modules
+// module formats -> AMD (browser applications)
+                  -> CommonJS (Node.js)
+                  -> UMD (both)
+                  -> ES6 modules
+// we will mainly focus on commonJs and ES6 modules                  
+
+*/
+// commonJS modules
+// rule - things that are highly related should go together
+// aka cohesion.
+// we use module.export() and require('./circle');
+
+// ES6 modules 
+// we use the export keyword before the class declaration
+// and import {Circle} from './circle.js';
+// also change type of script to module.
+
+
+// tooling 
+/*
+ transpiler = translator + compiler
+ babel is a very popular transpiler for modern js
+ A module bundler is responsible for combining 
+ all our js files into a single file which we call a 
+ bundle. there are many module bundlers out there but 
+ the most popular one is (webpack).
+ So if we give our js files to webpack it will combine them
+ into a single file and minify our code by getting rid of 
+ white spaces and comments and it will shorten our code.
+  
+*/
 
  
 
