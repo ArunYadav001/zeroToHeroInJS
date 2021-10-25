@@ -11,6 +11,6 @@ export class Teacher extends Person{
       }
   }
 
-  const t = new Teacher("Mosh", "Msc");
+  const t = new Teacher("John", "Msc");
   console.log(t.degree);
   console.log(t.walk());
