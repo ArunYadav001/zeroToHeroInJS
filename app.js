@@ -583,8 +583,8 @@ console.log(interest(10000,3.5,5));
 // getters and setters
 // get          set
 const person = {
-    firstName : 'Mosh',
-    lastName : 'Hamedani',
+    firstName : 'John',
+    lastName : 'Donner',
     get fullName(){
       return `${person.firstName} ${person.lastName}`;   
     },
@@ -672,10 +672,10 @@ functions are objects in javascript
 function playVideo(a,b){
     console.log(this);
 }
-playVideo.call({name : 'Mosh'},1,2); 
+playVideo.call({name : 'John'},1,2); 
 // now this will refer to the object instead of reffering to window.
-playVideo.apply({name : 'Mosh'},[1,2]);
-const fn = playVideo.bind({name : 'Mosh'});
+playVideo.apply({name : 'John'},[1,2]);
+const fn = playVideo.bind({name : 'John'});
 fn();
 // all three methods produce similar results 
 
